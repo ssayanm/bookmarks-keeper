@@ -21,10 +21,10 @@ window.addEventListener("click", (e) => (e.target === modal ? modal.classList.re
 function validate(nameValue, urlValue){
     const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
     const regex = new RegExp(expression);
-    if(urlValue.match(regex)){
-        alert('match');
+    if (!nameValue || !urlValue) {
+        alert('please submit values for both the fields')
     }
-    if(!urlValue.match(regex)){
+    if (!urlValue.match(regex)) {
         alert('please provide a valid website address')
         return false;
     }
@@ -38,7 +38,9 @@ function storeBookmark(e){
     if(!urlValue.includes('http://', 'https://')){
         urlValue = `https://${urlValue}`;
     }
-    validate(nameValue, urlValue)
+    if(!validate(nameValue, urlValue)){
+        return false;
+    }
 }
 
 // event listener
